@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import rospy
+import numpy as np
 from std_msgs.msg import Int32
 from sandbox.msg import ShipData
 
