@@ -8,27 +8,21 @@ from std_msgs.msg import Int32
 def sMF(x,points):
   leftpoint = points[0]
   rightpoint = points[1]
-
-  if x <= leftpoint:
-    xfuzzy = 0
-  elif x < rightpoint:
-    xfuzzy = ((x - leftpoint)*100) / (rightpoint - leftpoint)
-  elif x >= rightpoint:
-    xfuzzy = 100
-  return xfuzzy
+  range = points[2]
+  b = (leftpoint + rightpoint)/2
+  a = range/(2*(rightpoint - leftpoint))
+  xfuzzy =  100/(1 + np.exp(a * (-x + b)))
+  return xfuzzy   
 
 # Z-ksztaltna funkcja przynaleznosci
 def zMF(x,points):
   leftpoint = points[0]
   rightpoint = points[1]
-
-  if x <= leftpoint:
-    xfuzzy = 100
-  elif x < rightpoint:
-    xfuzzy = ((rightpoint - x)*100) / (rightpoint - leftpoint)
-  elif x >= rightpoint:
-    xfuzzy = 0
-  return xfuzzy
+  range = points[2]
+  b = (leftpoint + rightpoint)/2
+  a = range/(2*(rightpoint - leftpoint))
+  xfuzzy =  100/(1 + np.exp(a * (x - b)))
+  return xfuzzy   
 
 # Trojkatna funkcja przynaleznocci
 def triMF(x, points):
@@ -130,26 +124,26 @@ def fuzzyOr(ruleA,ruleB):
 # de to pochodna bledu kursu * 10
 
 #Przeslanki
-eNL = [-40, -15]
+eNL = [-40, -15, 20]
 eNS = [-20, -10, -3]
 eZ = [-5, 0, 5]
 ePS = [3, 10, 20]
-ePL = [15, 40]
+ePL = [15, 40, 20]
 
-deNL = [-40, -15]
+deNL = [-40, -15, 20]
 deNS = [-20, -10, -3]
 deZ = [-5, 0, 5]
 dePS = [3, 10, 20]
-dePL = [15, 40]
+dePL = [15, 40, 20]
 
 #Konkluzje
-MaxBakburta = [1, 2]
+MaxBakburta = [1, 2, 1]
 MocnoBakburta = [0,15,30]
 LekkoBakburta = [25,35,45]
 SterZero = [40,50,60]
 LekkoSterburta = [55,65,75]
 MocnoSterburta = [70,85,100]
-MaxSterburta = [98, 99]
+MaxSterburta = [98, 99, 1]
 
 #Zdefiniowanie aktualnej wartosci przeslanki
 #Uchyb
