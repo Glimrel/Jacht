@@ -1,33 +1,28 @@
 #!/usr/bin/env python
 
 import rospy
+import numpy as np
 from std_msgs.msg import Int32
 
 # S-ksztaltna funkcja przynaleznosci
 def sMF(x,points):
   leftpoint = points[0]
   rightpoint = points[1]
-
-  if x <= leftpoint:
-    xfuzzy = 0
-  elif x < rightpoint:
-    xfuzzy = ((x - leftpoint)*100) / (rightpoint - leftpoint)
-  elif x >= rightpoint:
-    xfuzzy = 100
-  return xfuzzy
+  range = points[2]
+  b = (leftpoint + rightpoint)/2
+  a = range/(2*(rightpoint - leftpoint))
+  xfuzzy =  100/(1 + np.exp(a * (-x + b)))
+  return xfuzzy   
 
 # Z-ksztaltna funkcja przynaleznosci
 def zMF(x,points):
   leftpoint = points[0]
   rightpoint = points[1]
-
-  if x <= leftpoint:
-    xfuzzy = 100
-  elif x < rightpoint:
-    xfuzzy = ((rightpoint - x)*100) / (rightpoint - leftpoint)
-  elif x >= rightpoint:
-    xfuzzy = 0
-  return xfuzzy
+  range = points[2]
+  b = (leftpoint + rightpoint)/2
+  a = range/(2*(rightpoint - leftpoint))
+  xfuzzy =  100/(1 + np.exp(a * (x - b)))
+  return xfuzzy   
 
 # Trojkatna funkcja przynaleznocci
 def triMF(x, points):
@@ -129,18 +124,18 @@ def fuzzyOr(ruleA,ruleB):
 # 100 - max zluzowany
 
 #Przeslanki
-Fordewind = [150, 180]
+Fordewind = [150, 180, 20]
 Baksztag = [105, 135, 165]
 Polwiatr = [60, 90, 120]
 Bajdewind = [45, 60 ,85]
-Martwy = [20,60]
+Martwy = [20,60, 20]
 
 #Konkluzje
-Wyluzowane = [75, 115];
+Wyluzowane = [75, 110, 26];
 Wybrane = [50, 75, 100]
 MocnoWybrane =[25, 50, 75]
 BardzoMocnoWybrane =[0, 15, 30]
-MaksymalnieWybrane = [0, 20]
+MaksymalnieWybrane = [-5, 20, 20]
 
 def FordewindMF(WindDirection):
     return sMF(WindDirection, Fordewind)
