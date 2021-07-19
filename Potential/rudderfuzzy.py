@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import rospy
+import numpy as np
 from sandbox.msg import Courseerror
 from std_msgs.msg import Int32
 
