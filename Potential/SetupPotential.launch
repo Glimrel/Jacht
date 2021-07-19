@@ -1,0 +1,9 @@
+<launch>
+  <node name="Capitan" pkg="sandbox" type="capitan.py" output="screen"/>
+  <node name="PotentialField" pkg="sandbox" type="potential.py" output="screen"/>
+  <node name="SailControler" pkg="sandbox" type="sailfuzzy.py" output="screen"/>
+  <node name="RudderControler" pkg="sandbox" type="rudderfuzzy.py" output="screen"/>
+  <node name="Fuse" pkg="sandbox" type="rollfuzzy.py" output="screen"/>
+  <node name="MeasuringControlSystem" pkg="sandbox" type="MeasuringControlSystem.py" output="screen"/>
+  <node name="IoT" pkg="sandbox" type="ibm.py" output="screen"/>
+</launch>
