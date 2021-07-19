@@ -12,32 +12,25 @@ def sailPub(sail):
     publisher = rospy.Publisher('sailFuse', Int32, queue_size=10)
     publisher.publish(sail)
 
-
 # S-ksztaltna funkcja przynaleznosci
 def sMF(x,points):
   leftpoint = points[0]
   rightpoint = points[1]
-
-  if x <= leftpoint:
-    xfuzzy = 0
-  elif x < rightpoint:
-    xfuzzy = ((x - leftpoint)*100) / (rightpoint - leftpoint)
-  elif x >= rightpoint:
-    xfuzzy = 100
-  return xfuzzy
+  range = points[2]
+  b = (leftpoint + rightpoint)/2
+  a = range/(2*(rightpoint - leftpoint))
+  xfuzzy =  100/(1 + np.exp(a * (-x + b)))
+  return xfuzzy   
 
 # Z-ksztaltna funkcja przynaleznosci
-def zMF(x,points):  
+def zMF(x,points):
   leftpoint = points[0]
   rightpoint = points[1]
-
-  if x <= leftpoint:
-    xfuzzy = 100
-  elif x < rightpoint:
-    xfuzzy = ((rightpoint - x)*100) / (rightpoint - leftpoint)
-  elif x >= rightpoint:
-    xfuzzy = 0
-  return xfuzzy
+  range = points[2]
+  b = (leftpoint + rightpoint)/2
+  a = range/(2*(rightpoint - leftpoint))
+  xfuzzy =  100/(1 + np.exp(a * (x - b)))
+  return xfuzzy   
 
 # Trojkatna funkcja przynaleznocci
 def triMF(x, points):
@@ -111,12 +104,12 @@ def fuzzyOr(ruleA,ruleB):
   return result
 
 #Przeslanki
-Safe = [0, 30]
+Safe = [0, 30, 12]
 Risky = [20, 30, 40]
-Dangerous  = [35,50] 
+Dangerous  = [35, 50, 18] 
 
-WindPort = [0,10]
-WindStarboard = [-10,0]
+WindPort = [0, 10, 20]
+WindStarboard = [-10, 0, 20]
 
 
 #Konkluzje
