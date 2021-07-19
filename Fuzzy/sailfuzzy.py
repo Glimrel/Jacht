@@ -193,13 +193,6 @@ def callback(data):
     rule = FuzzyRules(WindDirection)
     sail = deffuzyfication(rule)
     
-    if WindDirection <39:
-        sail = sail - 2  
-    if WindDirection <42:
-        sail = sail - 2  
-    if WindDirection <45:
-        sail = sail - 2
-    
     print("Dla kierunku", WindDirection, "kat zagla wynosi: ", sail)
     rospy.loginfo(rospy.get_caller_id() + 'I heard %s', data)
     publish(sail)
