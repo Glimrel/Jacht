@@ -144,12 +144,14 @@ def getPointsRotation(points, yaw):
     list.append(newPoint)
   return list
 
-def stanleyController(startPoint,goal,yaw):
+def stanleyController(startPoint,goal,boat):
   #Obliczenie kata pozadanego
   yaw_ref = math.pi/2 - math.atan2(goal.y - startPoint.y, goal.x - startPoint.x) 
   yaw_ref = yawLimit(yaw_ref)
+  yaw = math.pi/2 - math.atan2(goal.y - boat.y, goal.x - boat.x) 
+  yaw = yawLimit(yaw)
   print('Kat zadany = ', math.degrees(yaw_ref), yaw_ref)
-  print('Kat aktualny = ', yaw)
+  print('Kat aktualny = ', math.degrees(yaw), yaw)
   #Roznica miedzy katem pozadanym, a rzeczywistym
   yaw_diff = ( yaw_ref - math.radians(yaw) ) 
   #print(yaw_diff)
@@ -263,7 +265,7 @@ class Server:
               self.start = self.StanleyGoal
               self.StanleyGoal = self.StanleyPoints.pop(0) 
 
-        theta = stanleyController(self.start,self.StanleyGoal,yaw)               
+        theta = stanleyController(self.start,self.StanleyGoal,boat)               
         publish(int(theta))
         print('Obliczona wartosc nastawy steru wynosi:', int(theta))
               
