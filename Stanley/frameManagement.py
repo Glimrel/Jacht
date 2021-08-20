@@ -163,13 +163,24 @@ def parseBasicSensor(frame):
     else:
         msg.roll = RollFloat[0] + 180
     
+    #Zmiana formatu Longitude i Latitude
+    X = LongitudeFloat[0]/100
+    DX = int(X)
+    DXD = (X - DX) *  (100/60) + DX 
+    
+    Y = LatitudeFloat[0]/100
+    DY = int(Y)
+    DYD = (Y - DY) *  (100/60) + DY 
+    
     #Utworzenie wiadomosci typu Object data
     msg = ShipData()
     msg.yaw = YawFloat[0]
     #msg.roll = RollFloat[0]
     msg.pitch = PitchFloat[0]
-    msg.longitude = LongitudeFloat[0]
-    msg.latitude = LatitudeFloat[0]
+    #msg.longitude = LongitudeFloat[0]
+    #msg.latitude = LatitudeFloat[0]
+    msg.longitude = DXD
+    msg.latitude = DYD
     msg.angle = EncoderFloat[0]
     msg.LongitudeSign = LongitudeSign
     msg.LatitudeSign = LatitudeSign
