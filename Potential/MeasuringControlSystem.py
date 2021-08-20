@@ -53,11 +53,11 @@ class Server:
 
     def sail_callback(self, msg):
         # "Store" message received.
-        self.sail = msg
+        self.sail = msg.data
 
     def rudder_callback(self, msg):
         # "Store" the message received.
-        self.rudder = msg
+        self.rudder = msg.data
 
     def ManualControl_callback(self, msg):
         # "Store" the message received.
