@@ -1,0 +1,9 @@
+<launch>
+  <node name="symCapitan" pkg="sandbox" type="symCapitan2.py" output="screen"/>
+  <node name="SailControler" pkg="sandbox" type="sailfuzzyR.py" output="screen"/>
+  <node name="RudderControler" pkg="sandbox" type="rudderfuzzy.py" output="screen"/>
+  <node name="Model" pkg="sandbox" type="Obiekt5.py" output="screen"/>
+  <node name="symScreen" pkg="sandbox" type="symPlotdata.py" output="screen"/>
+  <node name="symPotentialField" pkg="sandbox" type="symPotential2.py" output="screen"/>
+  <node name="symWaypoints" pkg="sandbox" type="symWaypoints.py" output="screen"/>
+</launch>

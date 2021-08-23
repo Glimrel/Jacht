@@ -1,0 +1,10 @@
+float64 x
+float64 y
+float64 roll_angle
+float64 course_angle
+float64 x_speed
+float64 y_speed
+float64 roll_angle_speed
+float64 course_change_rate
+float64 wind_direction
+float64 wind_velocity
