@@ -1,0 +1,672 @@
+[
+    {
+        "id": "238983c4.075afc",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "52a3684.9bbe898",
+        "type": "ros-subscriber",
+        "z": "238983c4.075afc",
+        "topicname": "/toNodeRED",
+        "typepackage": "std_msgs",
+        "typename": "Float64MultiArray",
+        "x": 150,
+        "y": 120,
+        "wires": [
+            [
+                "5b7b3c91.d09224"
+            ]
+        ]
+    },
+    {
+        "id": "5b7b3c91.d09224",
+        "type": "change",
+        "z": "238983c4.075afc",
+        "name": "reduce",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "payload[\"layout\"]",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 330,
+        "y": 120,
+        "wires": [
+            [
+                "55905dd8.994b64"
+            ]
+        ]
+    },
+    {
+        "id": "c06473d6.41e8a",
+        "type": "ros-publisher",
+        "z": "238983c4.075afc",
+        "topicname": "/LongitudeFromRED",
+        "typepackage": "std_msgs",
+        "typename": "Float64",
+        "x": 900,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "90789428.82aa98",
+        "type": "function",
+        "z": "238983c4.075afc",
+        "name": "readData",
+        "func": "msg.payload[\"longf64\"] = msg.payload[\"longd\"] + msg.payload[\"longm\"]/100 + msg.payload[\"longs\"]/10000 + msg.payload[\"longms\"]/1000000\n\n\nmsg.payload[\"latif64\"] = msg.payload[\"latid\"] + msg.payload[\"latim\"]/100 + msg.payload[\"latis\"]/10000 + msg.payload[\"latims\"]/1000000\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 480,
+        "wires": [
+            [
+                "ef26f2ca.a0eb8",
+                "b41d00f8.b25b"
+            ]
+        ]
+    },
+    {
+        "id": "ef26f2ca.a0eb8",
+        "type": "change",
+        "z": "238983c4.075afc",
+        "name": "setLongitude",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "payload[\"longd\"]",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload[\"longm\"]",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload[\"longs\"]",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload[\"longms\"]",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload[\"latid\"]",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload[\"latim\"]",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload[\"latis\"]",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload[\"latims\"]",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload[\"latif64\"]",
+                "pt": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload[\"longf64\"]",
+                "pt": "msg",
+                "to": "payload[\"data\"]",
+                "tot": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload[\"longf64\"]",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 650,
+        "y": 440,
+        "wires": [
+            [
+                "c06473d6.41e8a"
+            ]
+        ]
+    },
+    {
+        "id": "b41d00f8.b25b",
+        "type": "change",
+        "z": "238983c4.075afc",
+        "name": "setLatitude",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "payload[\"longd\"]",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload[\"longm\"]",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload[\"longs\"]",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload[\"longms\"]",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload[\"latid\"]",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload[\"latim\"]",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload[\"latis\"]",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload[\"latims\"]",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload[\"longf64\"]",
+                "pt": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload[\"latif64\"]",
+                "pt": "msg",
+                "to": "payload[\"data\"]",
+                "tot": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload[\"latif64\"]",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 650,
+        "y": 520,
+        "wires": [
+            [
+                "2c73ce90.57fff2"
+            ]
+        ]
+    },
+    {
+        "id": "2c73ce90.57fff2",
+        "type": "ros-publisher",
+        "z": "238983c4.075afc",
+        "topicname": "/LatitudeFromRED",
+        "typepackage": "std_msgs",
+        "typename": "Float64",
+        "x": 890,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "deb362eb.c82f6",
+        "type": "ros-publisher",
+        "z": "238983c4.075afc",
+        "topicname": "/SetRudderManual",
+        "typepackage": "std_msgs",
+        "typename": "Int32",
+        "x": 890,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "ca3875b2.d0ea98",
+        "type": "change",
+        "z": "238983c4.075afc",
+        "name": "setRudder",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "payload[\"manual\"]",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload[\"sail\"]",
+                "pt": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload[\"rudder\"]",
+                "pt": "msg",
+                "to": "payload[\"data\"]",
+                "tot": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload[\"rudder\"]",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 650,
+        "y": 220,
+        "wires": [
+            [
+                "deb362eb.c82f6"
+            ]
+        ]
+    },
+    {
+        "id": "2179504d.edd98",
+        "type": "change",
+        "z": "238983c4.075afc",
+        "name": "setSail",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "payload[\"manual\"]",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload[\"rudder\"]",
+                "pt": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload[\"sail\"]",
+                "pt": "msg",
+                "to": "payload[\"data\"]",
+                "tot": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload[\"sail\"]",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 630,
+        "y": 280,
+        "wires": [
+            [
+                "590d1765.3f8148"
+            ]
+        ]
+    },
+    {
+        "id": "590d1765.3f8148",
+        "type": "ros-publisher",
+        "z": "238983c4.075afc",
+        "topicname": "/SetSailManual",
+        "typepackage": "std_msgs",
+        "typename": "Int32",
+        "x": 880,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "39f4a297.a5a4be",
+        "type": "change",
+        "z": "238983c4.075afc",
+        "name": "ManualControl",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "payload[\"rudder\"]",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload[\"sail\"]",
+                "pt": "msg"
+            },
+            {
+                "t": "move",
+                "p": "payload[\"manual\"]",
+                "pt": "msg",
+                "to": "payload[\"data\"]",
+                "tot": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload[\"manual\"]",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 660,
+        "y": 340,
+        "wires": [
+            [
+                "741a3025.7f5e6"
+            ]
+        ]
+    },
+    {
+        "id": "741a3025.7f5e6",
+        "type": "ros-publisher",
+        "z": "238983c4.075afc",
+        "topicname": "/ManualControl",
+        "typepackage": "std_msgs",
+        "typename": "Bool",
+        "x": 880,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "cce8b642.bfabf8",
+        "type": "fred in",
+        "z": "238983c4.075afc",
+        "name": "Manual",
+        "server": "",
+        "client": "b6e66689.538748",
+        "x": 150,
+        "y": 260,
+        "wires": [
+            [
+                "cd7f87bf.0bad88"
+            ]
+        ]
+    },
+    {
+        "id": "728fd95e.f390e8",
+        "type": "fred in",
+        "z": "238983c4.075afc",
+        "name": "GPS",
+        "server": "",
+        "client": "33cfa464.3ee9ac",
+        "x": 150,
+        "y": 480,
+        "wires": [
+            [
+                "45919137.664f"
+            ]
+        ]
+    },
+    {
+        "id": "55905dd8.994b64",
+        "type": "fred out",
+        "z": "238983c4.075afc",
+        "name": "toIBM",
+        "server": "",
+        "client": "c985989f.47b5e8",
+        "x": 630,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "cd7f87bf.0bad88",
+        "type": "json",
+        "z": "238983c4.075afc",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 310,
+        "y": 260,
+        "wires": [
+            [
+                "9b80c921.4704e8"
+            ]
+        ]
+    },
+    {
+        "id": "45919137.664f",
+        "type": "json",
+        "z": "238983c4.075afc",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 290,
+        "y": 480,
+        "wires": [
+            [
+                "fedddf72.aefb"
+            ]
+        ]
+    },
+    {
+        "id": "9b80c921.4704e8",
+        "type": "change",
+        "z": "238983c4.075afc",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload['payload']",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload['payload']",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 350,
+        "y": 360,
+        "wires": [
+            [
+                "39f4a297.a5a4be",
+                "2179504d.edd98",
+                "ca3875b2.d0ea98"
+            ]
+        ]
+    },
+    {
+        "id": "fedddf72.aefb",
+        "type": "change",
+        "z": "238983c4.075afc",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload['payload']",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload['payload']",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload['set']",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 580,
+        "wires": [
+            [
+                "90789428.82aa98"
+            ]
+        ]
+    },
+    {
+        "id": "e467eae7.3a4e38",
+        "type": "debug",
+        "z": "238983c4.075afc",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "81329c60.161f8",
+        "type": "fred in",
+        "z": "238983c4.075afc",
+        "name": "Reset",
+        "server": "",
+        "client": "2a37f9cf.bb5006",
+        "x": 150,
+        "y": 700,
+        "wires": [
+            [
+                "76fc55eb.c553bc"
+            ]
+        ]
+    },
+    {
+        "id": "76fc55eb.c553bc",
+        "type": "json",
+        "z": "238983c4.075afc",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 330,
+        "y": 700,
+        "wires": [
+            [
+                "53170230.fdc6ec"
+            ]
+        ]
+    },
+    {
+        "id": "89ad54cd.54c328",
+        "type": "ros-publisher",
+        "z": "238983c4.075afc",
+        "topicname": "/reset",
+        "typepackage": "std_msgs",
+        "typename": "Bool",
+        "x": 850,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "53170230.fdc6ec",
+        "type": "change",
+        "z": "238983c4.075afc",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload['payload']",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload['payload']",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 520,
+        "y": 700,
+        "wires": [
+            [
+                "e467eae7.3a4e38",
+                "89ad54cd.54c328"
+            ]
+        ]
+    },
+    {
+        "id": "b6e66689.538748",
+        "type": "fred-client",
+        "endpoint": "manual2",
+        "private": true,
+        "username": "sailboat",
+        "wholemsg": "false"
+    },
+    {
+        "id": "33cfa464.3ee9ac",
+        "type": "fred-client",
+        "endpoint": "gpsdata2",
+        "private": true,
+        "username": "sailboat",
+        "wholemsg": "false"
+    },
+    {
+        "id": "c985989f.47b5e8",
+        "type": "fred-client",
+        "endpoint": "livedata1",
+        "private": true,
+        "username": "sailboat",
+        "wholemsg": "false"
+    },
+    {
+        "id": "2a37f9cf.bb5006",
+        "type": "fred-client",
+        "endpoint": "reset2",
+        "private": true,
+        "username": "sailboat",
+        "wholemsg": "false"
+    }
+]
