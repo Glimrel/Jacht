@@ -5,7 +5,7 @@ Autorzy: Tomasz Ujazdowski, Damian Kułaga<br/>
 
 Projest wykorzystuje ROS, Node-RED.<br/>
 
-Folder Algorytmy Wymiany Danych zawiera węzły wymiany informacji pomiędzy systemem decyzyjnym, a kontrolno pomiarowym.<br/>
+Folder Algorytmy Wymiany Danych zawiera węzły obsługujące UART pomiędzy systemem decyzyjnym, a kontrolno-pomiarowym.<br/>
 Folder Basic Symulation zawiera pliky wykonawcze dla symulacji utrzymywania kursu.<br/>
 Folder Fuzzy zawiera aktualne algorytmy rozmyte utrzymywania kursu, ustawienia żagli i kontroli przechyłu.<br/>
 Folder SLOW zawiera węzły grafu systemu decyzyjnego wykonywane z obniżoną częstotliwością.<br/>
